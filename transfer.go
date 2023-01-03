@@ -6,5 +6,3 @@ type Transfer interface {
 	io.Writer
 	io.Reader
 }
-
-

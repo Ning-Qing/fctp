@@ -8,17 +8,15 @@ import (
 type FileHeader interface {
 	Open() *os.File
 	Size() int64
-	Name() string
 	io.Writer
 }
 
 type fileHeader struct {
 	file *os.File
 	size int64
-	name string
 }
 
-func NewFileHeader(name string) (FileHeader, error) {
+func NewFileHeader() (FileHeader, error) {
 	file, err := os.CreateTemp(os.TempDir(), "fctp-")
 	if err != nil {
 		return nil, err
@@ -26,7 +24,6 @@ func NewFileHeader(name string) (FileHeader, error) {
 	return &fileHeader{
 		file: file,
 		size: 0,
-		name: name,
 	}, nil
 }
 
@@ -36,10 +33,6 @@ func (h *fileHeader) Open() *os.File {
 
 func (h *fileHeader) Size() int64 {
 	return h.size
-}
-
-func (h *fileHeader) Name() string {
-	return h.name
 }
 
 func (h *fileHeader) Write(p []byte) (n int, err error) {
