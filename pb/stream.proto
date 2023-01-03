@@ -4,6 +4,6 @@ package pb;
 
 option go_package = "./pb;pb";
 
-message Message {
-    bytes data = 1;
+message Message { 
+    bytes data = 2;
 }
