@@ -47,3 +47,7 @@ func (t *transfer) Read(p []byte) (n int, err error) {
 	n = copy(p, msg.Data)
 	return n, nil
 }
+
+func (t *transfer) Close() error {
+	return t.stream.CloseSend()
+}

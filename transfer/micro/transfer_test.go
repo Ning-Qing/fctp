@@ -36,6 +36,11 @@ func (s *stream) RecvMsg(m interface{}) error {
 	return proto.Unmarshal(<-s.ch, m.(proto.Message))
 }
 
+func (s *stream) CloseSend() error {
+	close(s.ch)
+	return nil
+}
+
 func TestStream(t *testing.T) {
 	var err error
 	want := []byte("hello world")
